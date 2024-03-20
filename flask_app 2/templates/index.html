@@ -1,0 +1,19 @@
+{% extends "header.html" %}
+{% block content %}
+
+
+<div class="container">
+    <h1>Welcome to Food Hub</h1>
+    <p>Review your favorite Restaurants!</p>
+    <p1>Powered by Yelp!</p1>
+
+
+    <form class="search-form" action="{{ url_for('search_restaurant') }}" method="GET">
+        <input class="search-input" type="text" name="location" placeholder="Enter location">
+        <button class="search-button" type="submit">Search</button>
+    </form>
+</div>
+
+{% endblock %}
+
+

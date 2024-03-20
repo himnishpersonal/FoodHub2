@@ -1,0 +1,49 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="row">
+    <div class="col">
+        {# Profile picture #}
+        <img class="img-thumbnail" src="data:image/png;base64,{{current_user.pic_encoded}}" alt="image">
+    </div>
+    <div class="col">
+        <h3>Edit Your Profile</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {# Upate food form #}
+        <form action="/edit" method="post">
+            {{ form1.csrf_token }}
+            <div class="form-group">
+                <label for="food">Favorite Food</label>
+                <input type="text" class="form-control" id="food" name="food" minlength="1" maxlength="40" required>
+                <button type="submit" class="btn btn-outline-primary btn-sm" id="submit1" name="submit1">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        {# Profile Picture Update Form #}
+        <form action="/edit" method="post" enctype="multipart/form-data">
+            {{ form2.csrf_token }}
+            <div class="form-group">
+                <label for="profile_picture">Profile Picture</label>
+                <input type="file" class="form-control-file" id="profile_picture" name="profile_picture" required>
+                <button type="submit" class="btn btn-outline-primary btn-sm" id="submit2" name="submit2">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

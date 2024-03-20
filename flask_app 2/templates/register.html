@@ -1,0 +1,50 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<div class="row">
+    <div class="col">
+        <h2>Registration</h2>
+    </div>
+</div>
+<!-- Registration Form: -->
+<div class="row">
+    <div class="col">
+        <form action="/register" method="post">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" minlength="1" maxlength="40" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <p> Password must be at least 8 characters and include a number, letter, and special character </p>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password"  name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit" name="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label>Already have an account?</label>
+        <h6><a href="{{ url_for('login') }}">Log In</a></h6>
+    </div>
+</div>
+
+{% endblock %}

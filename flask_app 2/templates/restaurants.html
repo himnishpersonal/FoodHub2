@@ -1,0 +1,25 @@
+{% extends "header.html" %}
+{% block content %}
+
+<h1>Search Results</h1>
+    {% if businesses %}
+        <div class="restaurant-grid">
+            {% for business in businesses %}
+                <a href="{{ url_for('restaurant_detail', business_id=business.id) }}" class="restaurant-item">
+                    <div class="restaurant-image">
+                        <img src="{{ business.image_url }}" alt="Restaurant Image">
+                    </div>
+                    <div class="restaurant-details">
+                        <h2>{{ business.name }}</h2>
+                        <p>Price Range: {{ business.price }}</p>
+                        <p><strong>Yelp's Rating:</strong> <span class="rating">{{ render_stars(business.rating) }}</span></p>  
+                        <p><strong>FoodHub's Rating:</strong> <span class="rating">{{ render_stars(reviews[business.id]) }}</span></p>  
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No restaurants found.</p>
+    {% endif %}
+
+{% endblock %}
